@@ -1,19 +1,3 @@
-/*
-* Project: kanModal
-* Author: Kan (454831746@qq.com)
-* Website: https://github.com/waterbeside/kanModal
-* 注，此原为sco.modal.js项目，因原作者多年没更新，已不适用现行的bootstrap版本。故对此进行修改和新增功能。
-* 20150518改，原版用在3.x版bootstrap上有bug ，已按3.x版modal框結構改好。。
-* 20150953改，兼容bootstrap3.3.5版
-* 20151028改，添加可拖动效果
-* 20151106改，添加option.onLoadSuccess,載入后执行動作
-* 20151112改，當兩個modal同時打開時，關閉其中一個後，黑背景不會消失。
-* 20160125改，增加內置幾個默認按鈕。
-* 20160126改，增加內置刷新按鈕、增加load,reload方法。
-* 20160412改，上传按钮支持IE8函数提交。。
-* 20160720改，加入取消按鈕，與關閉同
-* 20160720改，優化按鈕生成代碼
-*/
 ;(function($, undefined) {
 	"use strict";
 	var pluginName = 'kanModal';
@@ -36,10 +20,10 @@
 			if (!this.options.nobackdrop) {
 				$backdrop = $('.modal-backdrop');
 			}
-			
+
 			if (!this.$modal.length) {
 				var modal_foot = this.options.btns ? '<div class="modal-footer"></div>' : '';
-				this.$modal = $('<div class="modal fade" id="' + this.options.target.substr(1) + '"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h3 class="modal-title"></h3></div><div class="modal-body"></div>'+modal_foot+'</div></div></div>').appendTo(this.options.appendTo).hide();
+				this.$modal = $('<div class="modal fade" id="' + this.options.target.substr(1) + '"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"></div>'+modal_foot+'</div></div></div>').appendTo(this.options.appendTo).hide();
 			}
 			if(self.options.btns){
 				this.$modal.find('.modal-footer').html('');
@@ -47,7 +31,7 @@
 					$.fn[pluginName].createBtnBar.call(this,self);
 				}
 			}
-			this.$modal.find('.modal-header h3').html(this.options.title);
+			this.$modal.find('.modal-header .modal-title').html(this.options.title);
 			if (this.options.cssclass !== undefined) {
 				this.$modal.attr('class', 'modal fade ' + this.options.cssclass);
 			}
@@ -81,37 +65,36 @@
 				$backdrop[0].offsetWidth; // force reflow
 				$backdrop.addClass('in');
 			}
-
 			this.$modal.off('close.' + pluginName).on('close.' + pluginName, function() {
 				self.close.call(self);
 			});
-			
+
 			if (self.options.remote !== undefined && self.options.remote != '' && self.options.remote !== '#') {
 				self.load();
-				
+
 			} else {
 				self.$modal.find('.modal-body').html(self.options.content);
 
 				if(typeof(self.options.onLoadSuccess)=="function"){
 					self.options.onLoadSuccess(self);
 				}
-			}		
+			}
 
 			this.$modal.show().addClass('in');
 			$('body').addClass('modal-open');
 			this.$modal.scrollTop(0);
-			
+
 			//拖动
 			if (this.options.handle && this.options.draggable) {
 				$dialog.addClass('modal-draggable').css({'position':'absolute'});
-				var oLeft = this.options.left !== undefined ?  this.options.left : ($('body').width()-$dialog.width())/2 ;				
+				var oLeft = this.options.left !== undefined ?  this.options.left : ($('body').width()-$dialog.width())/2 ;
 				$dialog.addClass().css({'left':oLeft})
 				var $handle = this.$modal.find(this.options.handle);
 				var $modalbox = this.$modal
 				var dragging = false;
 				var iX, iY;
 				var $modal_draggable = this.$modal.find('.modal-draggable');
-				 
+
 				$handle.on({
 					mousedown:function(e){
 						if($modal_draggable.length>0){
@@ -122,7 +105,7 @@
 						}
 					},
 					mousemove:function(e){
-						if($modal_draggable.length>0){							
+						if($modal_draggable.length>0){
 							if (dragging) {
 						        var e = e || window.event;
 						        var oX = e.clientX - iX;
@@ -147,8 +130,8 @@
 				var $modal_draggable = this.$modal.find('.modal-draggable');
 				$dialog.removeClass('modal-draggable');
 				$handle.unbind('mousedown').unbind('mousemove').unbind('mouseup').removeClass('modal-handle');
-				
-			}			
+
+			}
 			return this;
 		}
 
@@ -170,7 +153,7 @@
 					if (spinner) {
 						spinner.stop();
 					}
-					if (self.options.cache && typeof(self.options.remote_o)=="undefined") {						
+					if (self.options.cache && typeof(self.options.remote_o)=="undefined") {
 						self.options.content = html;
 						self.options.remote_o = self.options.remote;
 						delete self.options.remote;
@@ -193,18 +176,18 @@
 					this.options.onLoadSuccess(this);
 				}
 			}
-			
+
 		}
 		,close: function() {
 			var modal_lenth = $('.modal:visible').length;
-			this.$modal.hide().off('.' + pluginName).find('.modal-body').html('');	
+			this.$modal.hide().off('.' + pluginName).find('.modal-body').html('');
 			if (this.options.cssclass !== undefined) {
 				this.$modal.removeClass(this.options.cssclass);
 			}
 			$(document).off('keyup.' + pluginName);
 			if(modal_lenth<2){
 				$('body').removeClass('modal-open');
-				$('.modal-backdrop').remove();	
+				$('.modal-backdrop').remove();
 			}
 			if (typeof this.options.onClose === 'function') {
 				this.options.onClose.call(this, this.options);
@@ -258,11 +241,11 @@
 			,attrString:'data-loading-text="提交中.."'
 			,onclick:function(btn,obj){
 				var $form = $.fn[pluginName].defaultBtnsGetForm(obj);
-				if($form.length>0){			
+				if($form.length>0){
 					$form.submit();
 				}else{
 					obj.$modal.trigger('close');
-				}	
+				}
 				return false;
 
 			}
@@ -300,14 +283,14 @@
 			,icon:'fa fa-refresh'
 			,btnClass:"btn  btn-default modal-btn-refrest"
 			,onclick:function(btn,obj){
-				obj.reload();			
+				obj.reload();
 			}
 		}
 		return defaultBtn;
 	};
 
 	$.fn[pluginName].defaultBtnsGetForm = function(obj){
-			
+
 		var formLen = obj.$modal.find('form').length;
 
 		if(formLen==1){
@@ -320,7 +303,7 @@
 				$form2 = obj.$modal.find('.form-modal-submit');
 				return form2;
 			}
-			
+
 		}else{
 			return false;
 		}
@@ -348,7 +331,7 @@
 
 	$.fn[pluginName].createBtnBar = function(obj){
 		var $footer = obj.$modal.find('.modal-footer');
-					
+
 		if(typeof(obj.options.btns)=="string"){
 			$footer.html(obj.options.btns);
 		}else if(typeof(obj.options.btns)=="object"){
@@ -359,7 +342,7 @@
 					var item_lower = $.trim(item.toLowerCase());
 					var $strbtn = $("<span>"+item+"</span>");
 					//if( item_lower=='submit'||item_lower=='reset'||item_lower=='close'||item_lower=='cancel'||item_lower=='refresh'){
-					if($.inArray(item_lower,btnDefaultNameArray)>-1){	
+					if($.inArray(item_lower,btnDefaultNameArray)>-1){
 						var btnSetting = defaultsBtnList[item_lower];
 						$strbtn  =  $.fn[pluginName].createBtn(obj,btnSetting);
 					}
@@ -370,27 +353,23 @@
 				}
 				$footer.append($strbtn);
 			})
-			
+
 		}
 	};
-
 	$.fn[pluginName].options = {};
-
 	$.fn[pluginName].defaults = {
-		title: '&nbsp;'		
-		,target: '#modal'	
-		,content: ''		
-		,appendTo: 'body'	
-		,cache: false		
-		,keyboard: false
+		title: '&nbsp;'
+		,target: '#modal'
+		,content: ''
+		,appendTo: 'body'
+		,cache: false
+		,keyboard: true
 		,nobackdrop: false
-		,draggable:true 
-		,data:'' 
+		,draggable:true
+		,data:''
 		,handle:'.modal-header'
 		,btns:['refresh','cancel','submit']
 	};
-
-	
 	$(document).on('click.' + pluginName, '[data-trigger="modal"]', function() {
 		$(this)[pluginName]();
 		if ($(this).is('a')) {
