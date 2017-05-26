@@ -80,7 +80,8 @@
 				}
 			}
 
-			this.$modal.show().addClass('in');
+			this.$modal.show();
+			setTimeout(function(){self.$modal.addClass('in')},200);
 			$('body').addClass('modal-open');
 			this.$modal.scrollTop(0);
 
@@ -180,7 +181,9 @@
 		}
 		,close: function() {
 			var modal_lenth = $('.modal:visible').length;
-			this.$modal.hide().off('.' + pluginName).find('.modal-body').html('');
+			var $modal = this.$modal;
+			this.$modal.removeClass('in').off('.' + pluginName).find('.modal-body').html('');
+			setTimeout(function(){$modal.hide()},200)
 			if (this.options.cssclass !== undefined) {
 				this.$modal.removeClass(this.options.cssclass);
 			}
@@ -365,7 +368,7 @@
 		,cache: false
 		,keyboard: true
 		,nobackdrop: false
-		,draggable:true
+		,draggable:false
 		,data:''
 		,handle:'.modal-header'
 		,btns:['refresh','cancel','submit']
