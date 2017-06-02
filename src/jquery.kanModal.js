@@ -1,6 +1,17 @@
-;(function($, undefined) {
+/* globals define */
+;(function(factory) {
+  "use strict";
+  if (typeof define === "function" && define.amd) {
+    // AMD模式
+    define(["jquery"], factory);
+  } else {
+    // 全局模式
+    factory(jQuery);
+  }
+}(function($, undefined) {
   "use strict";
   var pluginName = 'kanModal';
+
   function Modal(options) {
     $.fn[pluginName].options = this.options = $.extend({}, $.fn[pluginName].defaults, options);
     this.$modal = $(this.options.target).attr('class', 'modal fade').hide();
@@ -21,14 +32,19 @@
         $backdrop = $('.modal-backdrop');
       }
       if (!this.$modal.length) {
-        var modal_foot = this.options.btns ? '<div class="modal-footer"></div>' : '';
-        this.$modal = $('<div class="modal fade" id="' + this.options.target.substr(1) + '"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"></div>' + modal_foot + '</div></div></div>').appendTo(this.options.appendTo).hide();
+        this.$modal = $('<div class="modal fade" id="' + this.options.target.substr(1) + '"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"></div></div></div></div>').appendTo(this.options.appendTo).hide();
       }
       if (self.options.btns) {
+        if (!this.$modal.find('.modal-footer').length) {
+          var modal_foot = '<div class="modal-footer"></div>';
+          this.$modal.find('.modal-body').after(modal_foot);
+        }
         this.$modal.find('.modal-footer').html('');
         if (self.options.btns) {
           $.fn[pluginName].createBtnBar.call(this, self);
         }
+      } else {
+        this.$modal.find('.modal-footer').remove();
       }
       this.$modal.find('.modal-header .modal-title').html(this.options.title);
       if (this.options.cssclass !== undefined) {
@@ -385,4 +401,4 @@
     $(this).closest('.modal').trigger('close');
   });
 
-})(jQuery);
+}));

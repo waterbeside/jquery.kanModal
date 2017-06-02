@@ -1,158 +1,190 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="renderer" content="webkit">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>kanModal Demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>kanModal Demo</title>
 
-<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
 
 </head>
 
 <body>
-<div class="container-fluid">
-	<div class="row">
+	<div class="container-fluid">
+		<div class="row">
 
-		<div class="col-sm-12" >
-			<h1>kanModal</h1>
-			<p>这是一个简单的弹出模态框插件，基于bootstrap</p>
-			<p>此原为sco.modal.js项目，但因原作者多年没更新，已不适用现行的bootstrap版本。于是只好在原基础上进行修改，以适应现行bootstrap版本。后又为了满足一些个人项目的需求，又陆陆续续地进行多次修改和添加功能，如使modal可以拖动，加入了底部默认按钮，添加load，reload方法等等</p>
+			<div class="col-sm-12">
+				<h1>kanModal</h1>
+				<p>这是一个简单的弹出模态框插件，基于bootstrap</p>
+				<p>此原为sco.modal.js项目，但因原作者多年没更新，已不适用现行的bootstrap版本。于是只好在原基础上进行修改，以适应现行bootstrap版本。后又为了满足一些个人项目的需求，又陆陆续续地进行多次修改和添加功能，如使modal可以拖动，加入了底部默认按钮，添加load，reload方法等等</p>
 
-			<h2>一·用法</h2>
-			<div class="panel panel-default">
-				<div class="panel-heading">demo</div>
-				<div class="panel-body">
-					<a class="btn btn-primary" data-width="700" data-trigger="modal" data-title="模态框 1"  href="aj_modal_1.html">弹出模态框 1</a>
-					<a class="btn btn-primary" onclick="showModal()">弹出模态框 2</a>
+				<h2>一·用法</h2>
+				<div class="panel panel-default">
+					<div class="panel-heading">demo</div>
+					<div class="panel-body">
+						<a class="btn btn-primary" data-width="700" data-trigger="modal" data-title="模态框 1" href="aj_modal_1.html">弹出模态框 1</a>
+						<a class="btn btn-primary" onclick="showModal()">弹出模态框 2</a>
+						<a class="btn btn-primary" onclick="showModalnobtn()">弹出模态框 3</a>
+					</div>
 				</div>
+
+
+				<h2>二·设置</h2>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>名称</td>
+							<td>说明</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>title</td>
+							<td>标题</td>
+						</tr>
+						<tr>
+							<td>remote</td>
+							<td>使用ajax加载内容时的url</td>
+						</tr>
+						<tr>
+							<td>target</td>
+							<td>生成的模态框指定id，默认为#modal</td>
+						</tr>
+						<tr>
+							<td>draggable</td>
+							<td>是否可拖放</td>
+						</tr>
+						<tr>
+							<td>handle</td>
+							<td>如果能拖放，指定鼠标能拖放对像，默认为.modal-header</td>
+						</tr>
+						<tr>
+							<td>width</td>
+							<td>指定宽度</td>
+						</tr>
+						<tr>
+							<td>btns</td>
+							<td>设定按钮，默认有['refresh','close','submit']三个按钮</td>
+						</tr>
+						<tr>
+							<td>data</td>
+							<td>ajax请求时设定传递的参数</td>
+						</tr>
+						<tr>
+							<td>content</td>
+							<td>如果不使用ajax加载内容，可以用data设置指定内容</td>
+						</tr>
+
+
+
+					</tbody>
+				</table>
+				<h2>三·事件 </h2>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>事件</td>
+							<td>参数</td>
+							<td>说明</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>onLoadSuccess</td>
+							<td>self</td>
+							<td>数据加载完成时触发</td>
+						</tr>
+						<tr>
+							<td>onClose</td>
+							<td>options</td>
+							<td>当关闭模态框时触发</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<h2>四·方法 </h2>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>方法</td>
+							<td>参数</td>
+							<td>说明</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>show</td>
+							<td>null</td>
+							<td>显示模态框</td>
+						</tr>
+						<tr>
+							<td>close</td>
+							<td>null</td>
+							<td>关闭模态框</td>
+						</tr>
+						<tr>
+							<td>reload</td>
+							<td>null</td>
+							<td>重载数据</td>
+						</tr>
+						<tr>
+							<td>load</td>
+							<td>url</td>
+							<td>加载指定地址数据</td>
+						</tr>
+
+
+
+					</tbody>
+				</table>
 			</div>
-
-
-			<h2>二·设置</h2>
-			<table class="table table-bordered">
-				<thead>
-					<tr><td>名称</td><td>说明</td></tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>title</td>
-						<td>标题</td>
-					</tr>
-					<tr>
-						<td>remote</td>
-						<td>使用ajax加载内容时的url</td>
-					</tr>
-					<tr>
-						<td>target</td>
-						<td>生成的模态框指定id，默认为#modal</td>
-					</tr>
-					<tr>
-						<td>draggable</td>
-						<td>是否可拖放</td>
-					</tr>
-					<tr>
-						<td>handle</td>
-						<td>如果能拖放，指定鼠标能拖放对像，默认为.modal-header</td>
-					</tr>
-					<tr>
-						<td>width</td>
-						<td>指定宽度</td>
-					</tr>
-					<tr>
-						<td>btns</td>
-						<td>设定按钮，默认有['refresh','close','submit']三个按钮</td>
-					</tr>
-					<tr>
-						<td>data</td>
-						<td>ajax请求时设定传递的参数</td>
-					</tr>
-					<tr>
-						<td>content</td>
-						<td>如果不使用ajax加载内容，可以用data设置指定内容</td>
-					</tr>
-
-
-
-				</tbody>
-			</table>
-			<h2>三·事件 </h2>
-			<table class="table table-bordered">
-				<thead>
-					<tr><td>事件</td><td>参数</td><td>说明</td></tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>onLoadSuccess</td>
-						<td>self</td>
-						<td>数据加载完成时触发</td>
-					</tr>
-					<tr>
-						<td>onClose</td>
-						<td>options</td>
-						<td>当关闭模态框时触发</td>
-					</tr>
-
-				</tbody>
-			</table>
-			<h2>四·方法 </h2>
-			<table class="table table-bordered">
-				<thead>
-					<tr><td>方法</td><td>参数</td><td>说明</td></tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>show</td>
-						<td>null</td>
-						<td>显示模态框</td>
-					</tr>
-					<tr>
-						<td>close</td>
-						<td>null</td>
-						<td>关闭模态框</td>
-					</tr>
-					<tr>
-						<td>reload</td>
-						<td>null</td>
-						<td>重载数据</td>
-					</tr>
-					<tr>
-						<td>load</td>
-						<td>url</td>
-						<td>加载指定地址数据</td>
-					</tr>
-
-
-
-				</tbody>
-			</table>
 		</div>
 	</div>
 
+	<script src="//cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
+	<!-- <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="../src/jquery.kanModal.js"></script> -->
 
+	<script type="text/javascript">
+		require.config({
+			paths: {
+				"jquery": "//cdn.bootcss.com/jquery/1.11.3/jquery.min",
+				"kanModal": "../build/jquery.kanModal.min",
+			},
+		});
+		require(['kanModal'], function() {});
 
+		function showModalnobtn(ele) {
+			var modal = $.kanModal({
+				title: "模态框3",
+				content: "内容内容",
+				btns: false,
+			})
+			modal.show();
+		}
 
-</div>
-<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<script src="../src/jquery.kanModal.js"></script>
-
-<script type="text/javascript">
-    function showModal(ele){
-    	var modal = $.kanModal({
-    		title:"模态框2",
-    		remote: "aj_modal_2.html",
-    		data:{'catid':1},
-    		btns:['close'],
-    		onLoadSuccess:function(a){
-    			console.log(a)
-    		}})
-    	modal.show();
-    }
-</script>
+		function showModal(ele) {
+			var modal = $.kanModal({
+				title: "模态框2",
+				remote: "aj_modal_2.html",
+				data: {
+					'catid': 1
+				},
+				btns: ['close'],
+				onLoadSuccess: function(a) {
+					console.log(a)
+				}
+			})
+			modal.show();
+		}
+	</script>
 </body>
+
 </html>
