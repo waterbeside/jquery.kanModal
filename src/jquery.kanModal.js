@@ -126,7 +126,7 @@
                 dragging = true;
                 iX = e.clientX - $modal_draggable.offset().left + parseInt($modal_draggable.css('marginLeft'));
                 iY = e.clientY - $modal_draggable.offset().top + parseInt($modal_draggable.css('marginTop')) - $modalbox.scrollTop() + $(document).scrollTop();
-                this.setCapture();
+                if(this.setCapture){this.setCapture();}
               }
             },
             mousemove: function(e) {
@@ -147,7 +147,7 @@
               if ($modal_draggable.length > 0) {
                 if (dragging) {
                   dragging = false;
-                  $modal_draggable[0].releaseCapture();
+                  if(this.releaseCapture){this.releaseCapture();}
                   e.cancelBubble = true;
                 }
               }
